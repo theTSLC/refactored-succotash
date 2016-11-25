@@ -5,7 +5,7 @@ export const FETCH_POSTS = 'FETCH_POSTS';
 const ROOT_URL = 'http://reduxblog.herokuapp.com/api';
 const API_KEY = '?key=puss&boots';
 
-export function fetchPost() {
+export function fetchPosts() {
 	// action creator
   const request = axios.get(`${ROOT_URL}/posts${API_KEY}`);
 
