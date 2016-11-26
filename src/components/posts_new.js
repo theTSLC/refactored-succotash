@@ -18,18 +18,24 @@ class PostsNew extends Component {
  		  	<label>Title</label>
  		  	<input type="text" className="form-control" {...title} />
  		  	<div className="text-help">
- 		  	  {title.error}
+ 		  	  {title.touched ? title.error : ''}
  		  	 </div>
  		  </div>
 
  		  <div className="form-group">
  		  	<label> Categories </label>
  		  	<input type="text" className="form-control" {...categories} />
+ 		  	<div className="text-help">
+ 		  	  {categories.touched ? categories.error : ''}
+ 		  	 </div>
  		  </div>
 
  		  <div className="form-group">
  		  	<label> Content </label>
  		  	<textarea className="form-control" {...content} />
+ 		  	 		  	<div className="text-help">
+ 		  	  {content.touched ? content.error : ''}
+ 		  	 </div>
  		  </div>
 
  		  <button type="submit" className="btn btn-primary"> Submit </button>
@@ -44,6 +50,12 @@ function validate(values) {
 
 	if(!values.title) {
 		errors.title = "Enter a username";
+	}
+	if (!values.categories) {
+		errors.categories = "Enter at least one category"
+	}
+	if (!values.content) {
+		errors.content= "Enter some content"
 	}
 
 	return errors;
