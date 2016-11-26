@@ -1,9 +1,22 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { reduxForm } from 'redux-form';
 import { createPost } from '../actions/index';
 import { Link } from 'react-router';
 
 class PostsNew extends Component {
+	static contextTypes = {
+		router: PropTypes.object
+	};
+
+	onSubmit(props) {
+		this.props.createPost(props)
+			.then(() => {
+				//Blog post has been created, navigate user to the index
+				//Navigate by calling this.context.router.push with the new path to navigate to
+				this.context.router.push('/');
+			});
+	}
+
  render() {
  	//ES5 syntax below commented out, equivalent to following line in ES6 syntax
  	// const handleSubmit = this.props.handleSubmit;
@@ -13,7 +26,7 @@ class PostsNew extends Component {
  	const {fields: {title, categories, content}} = this.props;
 
  	return(
- 		<form onSubmit={handleSubmit(this.props.createPost)}>
+ 		<form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
  		  <h3> Create A New Post </h3>
 
  		  <div className={`form-group ${title.touched && title.invalid ? "has-danger" : ''}`}>
